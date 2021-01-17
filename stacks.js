@@ -66,7 +66,7 @@ const numbers = [1, 2, 3, 4, 5, 6, 7, 8, 9];
 
 //fill the stack with 20 cards
 let cards = 0;
-while (cards < 20) {
+while (cards < 20) { // or while (!cardgame.isFull())
     let color = getrandom(colors);
     let number = getrandom(numbers);
     cardgame.push(color, number);
