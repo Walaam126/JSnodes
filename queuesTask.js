@@ -52,9 +52,8 @@ class Queue {
           return removed.groupSize;
         }
       };
-
-
 }
+
 addgroup = (ride,groupSize) => {
     while (groupSize > 0) {
         if (groupSize > 12)
