@@ -40,13 +40,13 @@ class HashTable {
         let key = "";
         if (student.score >= 90)
             key = "A";
-        else if (student.score < 90 && student.score >= 80)
+        else if (student.score >= 80)
             key = "B";
 
-        else if (student.score < 80 && student.score >= 70)
+        else if (student.score >= 70)
             key = "C";
 
-        else if (student.score >= 60 && student.score < 70)
+        else if (student.score >= 60)
             key = "D";
 
         else
@@ -62,14 +62,8 @@ class HashTable {
         }
     }
 
-    distributeStudents = () => {
-        let total = 0;
-        students.forEach(student => this.addStudent(student));
-    }
-
-    printclasses = () => {
-        console.log(this.classes);
-    }
+    distributeStudents = () => students.forEach(student => this.addStudent(student));
+    
 }
 
 const maxnumber = prompt("What is the maximum number of students for the class? ");
