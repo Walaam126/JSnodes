@@ -5,26 +5,47 @@ class TreeNode{
         this.children = []; //max children 2
     }
 
-  addChild = (node) => {
+  addChild = (node, lname) => {
+    if (this.children.length < 2) {
+      this.children.push(node);
+      return `added a child to ${lname}`;
+    }
+    else
+      return 'child is an orphan';
+  };
+  
+  getchildwithname = (name) => {
+    return this.children.fill((child) => child.name === name);
+  }
+  myaddChild = (node) => {
+    let current = this;
     const Fullnamearr = node.name.split(' ');
-    const parent = Fullnamearr[1];
-//iterating through the tree
-        let nodes = [this];
-        while (nodes.length > 0) {
-          let current = nodes.pop();
-          console.log(current.children);
-          if (current.name.includes(parent)) {
-            if (current.children.length < 2) {
-              current.children.push(node);
-              return `added a child to ${current.name}`;
-            }     
-            else
-              return "child is an orphan"; 
-          }//end of first if
-          else
-            return "parent does not exist";   
-    }//end of while
-};
+    let fname = Fullnamearr.shift();
+    let lname = Fullnamearr.pop();
+    //if person name have family name
+    if (current.name === lname) {
+      if (Fullnamearr.length > 0) {
+        for (let name of Fullnamearr) {
+          let child = current.getchildwithname(name);
+          if (child) {
+            current = child;
+          }
+          else {
+            let newNode = new TreeNode(name);
+            current.addChild(newNode, name);
+            current = newNode;
+          }
+        }
+      }
+      else {
+        let newNode = new TreeNode(fname);
+        console.log(current.addChild(newNode,lname));
+      }
+    } else {
+      console.log("person not belong to family");
+    }
+   
+  };
     traverse = () => {
         let nodes = [this];
         while (nodes.length > 0) {
@@ -41,18 +62,9 @@ while (userinput !=="done") {
   userinput = prompt("enter child full name (enter done if finished): ");
   if (userinput !== "done") {
     let child = new TreeNode(userinput);
-    console.log(root.addChild(child));
+    root.myaddChild(child);
   }
   console.log("------------------------------------");
 }
-
-// const child1 = new TreeNode("Billy Hamza");
-// const child1a = new TreeNode("bilder Billy Hamza");
-// const child1b = new TreeNode("bbbbbbbbbb Billy Hamza");
-
-// console.log(root.addChild(child1));
-// console.log(child1.addChild(child1a));
-// console.log(child1.addChild(child1b));
-// root.traverse();
-
+root.traverse();
 
