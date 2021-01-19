@@ -4,14 +4,18 @@ const numbers = [
     [4, 2, [6, 7, [2, 6, 1]]]
 ]
 sum = (array) => {
+    arrsum = 0;
     if (array.length === 0)
         return 0;
-    if (Array.isArray(array[0])) {
-        return sum(array[0]);
-    }
-    else {
-        return array[0] + sum(array.slice(1));
-    }
+    array.forEach(element => {
+        if (Array.isArray(element)) {
+            arrsum+=sum(element);
+        }
+        else {
+            arrsum += element;
+        }
+    });
+    return arrsum;
+    
 }
-const myarr = [1, 1, 1, [1, 2, 3, 4]];
-// console.log(sum(myarr)); 
+console.log(sum(numbers)); 
